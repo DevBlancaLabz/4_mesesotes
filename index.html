@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cuatro meses contigo</title>
+<meta name="description" content="Una mini web para celebrar cuatro meses juntos y una invitación a nuestra próxima cita.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FFD1DC">
+<meta property="og:title" content="Cuatro meses contigo">
+<meta property="og:description" content="Tengo algo para ti. Desliza.">
+<meta property="og:image" content="assets/noche.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF3B6B' d='M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.800-8 11-8 11z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2B1B2E; --pink:#FFD1DC; --red:#FF3B6B; --yellow:#FFD23F; --blue:#6EC8FF; --purple:#B794F6; --cream:#FBF4E6;
+  --s-25:2px; --s-50:4px; --s-75:8px; --s-100:12px; --s-200:16px; --s-300:24px; --s-400:32px; --s-500:40px; --s-600:48px; --s-700:64px; --s-800:80px; --s-900:96px;
+  --ease:cubic-bezier(0.32,0.72,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Poppins',system-ui,sans-serif;background:#181818;color:#fff;overflow-x:clip;max-width:100%;font-size:1rem;line-height:1.5rem}
+h1,h2{text-wrap:balance;font-weight:700}
+p{text-wrap:pretty}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+
+/* ---------- Video de fondo fijo ---------- */
+.bg-video{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden;z-index:0;background:#131209}
+.bg-video video{width:100%;height:100%;object-fit:cover;display:block}
+.bg-video::after{content:"";position:absolute;inset:0;background:rgba(19,18,9,.38)}
+
+/* ---------- Revelado al entrar ---------- */
+.rv{opacity:0;transform:translateY(64px);filter:blur(8px);transition:all 900ms var(--ease)}
+.rv.in{opacity:1;transform:none;filter:none}
+.rv.d1{transition-delay:100ms}.rv.d2{transition-delay:200ms}.rv.d3{transition-delay:300ms}
+
+/* ---------- Seccion 1: tarjeta cartoon ---------- */
+.hero{position:relative;z-index:3;min-height:100svh;background:var(--pink);display:flex;align-items:center;justify-content:center;padding:var(--s-700) var(--s-200) var(--s-800);overflow:hidden;text-align:center}
+.wave{position:relative;z-index:3;height:64px;margin-top:-1px;line-height:0;pointer-events:none}
+.wave svg{display:block;width:100%;height:100%}
+.card{position:relative;z-index:2;width:100%;max-width:420px;background:#fff;border:4px solid var(--ink);border-radius:24px;box-shadow:8px 8px 0 var(--ink);padding:var(--s-400) var(--s-300) var(--s-400);transform:rotate(-2deg);animation:cardIn 1100ms var(--ease) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(96px) rotate(6deg) scale(.92)}to{opacity:1;transform:rotate(-2deg)}}
+.tape{position:absolute;top:-16px;left:50%;width:96px;height:32px;margin-left:-48px;background:var(--yellow);border:3px solid var(--ink);border-radius:4px;transform:rotate(3deg)}
+.kicker{display:inline-block;background:var(--ink);color:#fff;font-weight:600;font-size:.875rem;line-height:1.25rem;padding:var(--s-50) var(--s-200);border-radius:9999px;letter-spacing:.08em;text-transform:uppercase}
+.mascot{display:block;width:128px;height:128px;margin:var(--s-200) auto 0;animation:bob 2.4s var(--ease) infinite}
+@keyframes bob{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-12px) scale(1.06)}}
+.big{font-size:3.75rem;line-height:1;color:var(--red);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;text-shadow:4px 4px 0 var(--ink);margin-top:var(--s-100)}
+.card h1{font-size:1.875rem;line-height:2.25rem;margin-top:var(--s-100);color:var(--ink)}
+.card p{color:#5a4660;font-weight:500;margin-top:var(--s-100)}
+.cta{display:inline-flex;align-items:center;gap:var(--s-75);margin-top:var(--s-300);background:var(--red);color:#fff;font-weight:600;font-size:1rem;line-height:1.5rem;padding:var(--s-100) var(--s-300);border:3px solid var(--ink);border-radius:9999px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;cursor:pointer;transition:all 300ms var(--ease)}
+.cta:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.cta:active{transform:translate(2px,2px) scale(.98);box-shadow:2px 2px 0 var(--ink)}
+.cta svg{width:20px;height:20px}
+
+.balloon{position:absolute;z-index:1;width:72px;height:128px;animation:rise var(--t,9s) ease-in-out infinite;animation-delay:var(--dl,0s);will-change:transform}
+.balloon svg{width:100%;height:100%;overflow:visible}
+@keyframes rise{0%,100%{transform:translateY(24px) rotate(-4deg)}50%{transform:translateY(-32px) rotate(5deg)}}
+.heart-f{position:absolute;z-index:1;width:24px;height:24px;bottom:-32px;animation:up var(--t,10s) linear infinite;animation-delay:var(--dl,0s);opacity:0}
+@keyframes up{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:.9}100%{transform:translateY(-110svh) translateX(var(--dx,24px)) scale(1.2);opacity:0}}
+.confetti{position:absolute;z-index:1;width:12px;height:12px;border:2px solid var(--ink);animation:fall var(--t,7s) linear infinite;animation-delay:var(--dl,0s);top:-24px}
+@keyframes fall{to{transform:translateY(110svh) rotate(540deg)}}
+.pop{position:fixed;z-index:50;width:32px;height:32px;pointer-events:none;animation:pop 1000ms var(--ease) forwards}
+@keyframes pop{to{transform:translate(var(--x),var(--y)) scale(.4) rotate(var(--r));opacity:0}}
+
+/* ---------- Seccion 2: pila de fotos ---------- */
+.story{position:relative;z-index:2;overflow-x:clip;height:calc(130svh + var(--n,7) * 70svh)}
+.stage{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:var(--s-500) var(--s-200) var(--s-400);overflow:hidden}
+.glass{background:rgba(19,18,9,.55);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.28);border-radius:24px;padding:var(--s-200) var(--s-300);text-align:center;max-width:420px;width:100%}
+.glass .kicker{background:var(--red)}
+.glass h2{font-size:1.5rem;line-height:2rem;margin-top:var(--s-75)}
+.stack{position:relative;height:42svh;aspect-ratio:.78;max-width:70vw}
+.polaroid{position:absolute;inset:0;background:var(--cream);padding:var(--s-100) var(--s-100) var(--s-600);border-radius:4px;box-shadow:0 24px 48px rgba(0,0,0,.5),0 2px 0 rgba(255,255,255,.6) inset;will-change:transform}
+.polaroid img{width:100%;height:100%;object-fit:cover;display:block;border-radius:2px;filter:sepia(.22) saturate(1.1) contrast(1.04)}
+.polaroid::after{content:"";position:absolute;left:var(--s-100);right:var(--s-100);top:var(--s-100);bottom:var(--s-600);border-radius:2px;box-shadow:inset 0 0 32px rgba(60,30,0,.35);pointer-events:none}
+.polaroid .cap{position:absolute;left:0;right:0;bottom:var(--s-100);text-align:center;color:#3b2a1a;font-weight:500;font-size:.875rem;line-height:1.25rem}
+.polaroid:not(:first-child){transform:translateY(120svh)}
+.reveal{font-size:1.125rem;line-height:1.75rem;font-weight:500;text-align:center;max-width:420px}
+.reveal .w{opacity:.3;transition:opacity 600ms var(--ease)}
+.reveal .w.on{opacity:1}
+
+/* ---------- Seccion 3 ---------- */
+.final{position:relative;z-index:2;overflow-x:clip;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s-400);padding:var(--s-800) var(--s-200) var(--s-700);text-align:center}
+.land{position:relative;width:min(100%,460px);background:var(--cream);padding:var(--s-100) var(--s-100) var(--s-600);border-radius:4px;box-shadow:0 24px 48px rgba(0,0,0,.5);transform:rotate(-3deg)}
+.land.rv.in{transform:rotate(-3deg)}
+.land img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;border-radius:2px;filter:sepia(.22) saturate(1.1) contrast(1.04)}
+.land .cap{position:absolute;left:0;right:0;bottom:var(--s-100);color:#3b2a1a;font-weight:500;font-size:.875rem;line-height:1.25rem}
+.final h2{font-size:2.25rem;line-height:2.5rem;max-width:420px}
+.final p.sub{font-size:1.125rem;line-height:1.75rem;max-width:420px;font-weight:500}
+.meet{position:relative;width:max-content;max-width:100%;display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:var(--s-75);background:var(--red);color:#fff;font-weight:600;font-size:1rem;line-height:1.5rem;padding:var(--s-100) var(--s-300);border:3px solid #fff;border-radius:9999px;text-decoration:none;box-shadow:0 0 0 0 rgba(255,59,107,.7);animation:ping 2.2s var(--ease) infinite;transition:all 500ms var(--ease)}
+.meet:hover{transform:scale(1.05)}
+.meet:active{transform:scale(.98)}
+.meet svg{width:24px;height:24px;flex:none}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,59,107,.7)}70%,100%{box-shadow:0 0 0 24px rgba(255,59,107,0)}}
+footer{font-size:.75rem;line-height:1rem;opacity:.7;margin-top:var(--s-200)}
+
+/* ---------- Stickers ---------- */
+.st{position:absolute;z-index:5;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35));animation:wob 4s var(--ease) infinite}
+.st svg{width:100%;height:100%;overflow:visible}
+@keyframes wob{0%,100%{transform:rotate(var(--r,0deg)) scale(1)}50%{transform:rotate(calc(var(--r,0deg) + 8deg)) scale(1.1)}}
+.tag{position:absolute;z-index:5;white-space:nowrap;animation:wob 4s var(--ease) infinite;animation-delay:var(--dl,0s);background:#fff;color:var(--ink);font-weight:700;font-size:.875rem;line-height:1.25rem;padding:var(--s-50) var(--s-100);border-radius:9999px;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);transform:rotate(var(--r,-6deg));pointer-events:none}
+.tag.r{background:var(--red);color:#fff}.tag.y{background:var(--yellow)}.tag.b{background:var(--blue)}.tag.v{background:var(--purple)}
+.tag.lg{font-size:1.125rem;line-height:1.75rem;padding:var(--s-50) var(--s-200)}
+.tag sup{font-size:.75rem;line-height:1}
+/* etiquetas del hero: movil en las franjas libres, escritorio a los lados */
+.hero .tag{z-index:4}
+.h1t{left:16px;top:16px}.h2t{right:16px;top:20px}.h3t{left:16px;bottom:20px}.h4t{right:16px;bottom:24px}
+.card .tag{z-index:6}
+
+@media (min-width:768px){
+  .big{font-size:6rem}
+  .card{max-width:520px;padding:var(--s-500) var(--s-400)}
+  .card h1{font-size:2.25rem;line-height:2.5rem}
+  .glass h2{font-size:1.875rem;line-height:2.25rem}
+  .final h2{font-size:3rem;line-height:1}
+  .balloon{width:96px;height:170px}
+  .h1t{left:12%;top:32%}.h2t{right:12%;top:30%}.h3t{left:14%;bottom:26%}.h4t{right:15%;bottom:24%}
+  .tag{font-size:1.125rem;line-height:1.75rem;padding:var(--s-50) var(--s-200)}
+  .stack{height:46svh}
+}
+@media (max-height:700px){ .glass{padding:var(--s-100) var(--s-200)} .reveal{font-size:1rem;line-height:1.5rem} .stack{height:38svh} }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none;filter:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="heart" viewBox="0 0 32 32"><path d="M16 28S3 20 3 11.500A6.500 6.500 0 0 1 16 8a6.500 6.500 0 0 1 13 3.500C29 20 16 28 16 28z" fill="currentColor" stroke="#2B1B2E" stroke-width="2.500" stroke-linejoin="round"/><path d="M8 10.500a3.500 3.500 0 0 1 3.500-3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8"/></symbol>
+    <symbol id="heartSt" viewBox="0 0 32 32"><path d="M16 28S3 20 3 11.500A6.500 6.500 0 0 1 16 8a6.500 6.500 0 0 1 13 3.500C29 20 16 28 16 28z" fill="currentColor" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke"/><path d="M16 28S3 20 3 11.500A6.500 6.500 0 0 1 16 8a6.500 6.500 0 0 1 13 3.500C29 20 16 28 16 28z" fill="currentColor"/></symbol>
+    <symbol id="starSt" viewBox="0 0 32 32"><path d="M16 2l3.800 9.600L30 12.500l-7.800 6.600L24.600 29 16 23.600 7.400 29l2.400-9.900L2 12.500l10.200-.9z" fill="currentColor" stroke="#fff" stroke-width="3.500" stroke-linejoin="round" paint-order="stroke"/></symbol>
+    <symbol id="flowerSt" viewBox="0 0 32 32"><g stroke="#fff" stroke-width="3" paint-order="stroke"><circle cx="16" cy="7" r="6" fill="#FF8FB1"/><circle cx="25" cy="14" r="6" fill="#FF8FB1"/><circle cx="21.500" cy="25" r="6" fill="#FF8FB1"/><circle cx="10.500" cy="25" r="6" fill="#FF8FB1"/><circle cx="7" cy="14" r="6" fill="#FF8FB1"/></g><circle cx="16" cy="16" r="5" fill="#FFD23F" stroke="#fff" stroke-width="2"/></symbol>
+    <symbol id="balloon" viewBox="0 0 72 128"><path d="M36 100c-2 8 4 12 0 26" fill="none" stroke="#2B1B2E" stroke-width="3" stroke-linecap="round"/><path d="M36 4C16 4 6 20 6 38c0 20 18 40 30 52 12-12 30-32 30-52C66 20 56 4 36 4z" fill="currentColor" stroke="#2B1B2E" stroke-width="4" stroke-linejoin="round"/><path d="M32 92l4 8 4-8z" fill="currentColor" stroke="#2B1B2E" stroke-width="3" stroke-linejoin="round"/><path d="M20 22c-4 4-6 10-6 16" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/></symbol>
+    <symbol id="pin" viewBox="0 0 24 24"><path d="M12 22s7-6.200 7-12a7 7 0 1 0-14 0c0 5.800 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.500" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<div class="bg-video" aria-hidden="true">
+  <video id="vid" muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture>
+    <source src="assets/atardecer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<main id="main">
+
+<!-- ============ SECCION 1 ============ -->
+<section class="hero" id="inicio" aria-label="Felicitación">
+  <div class="balloon" style="left:4%;top:10%;color:var(--red);--t:8s"><svg><use href="#balloon"/></svg></div>
+  <div class="balloon" style="right:5%;top:6%;color:var(--blue);--t:10s;--dl:-2s"><svg><use href="#balloon"/></svg></div>
+  <div class="balloon" style="left:8%;bottom:14%;color:var(--yellow);--t:9s;--dl:-4s"><svg><use href="#balloon"/></svg></div>
+  <div class="balloon" style="right:6%;bottom:12%;color:var(--purple);--t:11s;--dl:-1s"><svg><use href="#balloon"/></svg></div>
+  <div id="fx"></div>
+  <span class="tag lg r h1t" style="--r:-8deg">4 ever</span>
+  <span class="tag lg y h2t" style="--r:7deg;--dl:-1s">P<sup>2</sup></span>
+  <span class="tag lg b h3t" style="--r:6deg;--dl:-2s">x siempre</span>
+  <span class="tag lg v h4t" style="--r:-7deg;--dl:-3s">Px2</span>
+
+  <div class="card">
+    <span class="tape" aria-hidden="true"></span>
+    <span class="tag lg" style="left:-16px;top:56px;--r:-10deg">P&amp;P</span>
+    <span class="tag lg r" style="right:-12px;top:24px;--r:9deg;--dl:-2s">sisi</span>
+    <span class="tag lg y" style="left:-10px;bottom:-16px;--r:6deg;--dl:-1s">doble P</span>
+    <span class="kicker">Hoy cumplimos</span>
+    <svg class="mascot" viewBox="0 0 120 120" role="img" aria-label="Corazón sonriente">
+      <path d="M60 108S10 76 10 42a28 28 0 0 1 50-17 28 28 0 0 1 50 17c0 34-50 66-50 66z" fill="#FF3B6B" stroke="#2B1B2E" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M26 36c2-8 8-12 15-12" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+      <circle cx="44" cy="54" r="6" fill="#2B1B2E"/><circle cx="76" cy="54" r="6" fill="#2B1B2E"/>
+      <circle cx="46" cy="52" r="2" fill="#fff"/><circle cx="78" cy="52" r="2" fill="#fff"/>
+      <ellipse cx="34" cy="66" rx="8" ry="5" fill="#FF8FB1"/><ellipse cx="86" cy="66" rx="8" ry="5" fill="#FF8FB1"/>
+      <path d="M50 70q10 12 20 0z" fill="#8a1c3a" stroke="#2B1B2E" stroke-width="3" stroke-linejoin="round"/>
+    </svg>
+    <div class="big">4 meses</div>
+    <h1>Feliz mesversario, mi amor</h1>
+    <p>Gracias por ser mi lugar favorito del mundo. Hice esto solo para ti, desliza y mira.</p>
+    <a class="cta" href="#recuerdos" id="start">Checalo
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- Transicion en ola hacia el video -->
+<div class="wave" aria-hidden="true">
+  <svg viewBox="0 0 400 64" preserveAspectRatio="none"><path d="M0 0h400v14c-17 0-17 36-33 36S334 14 317 14s-17 36-33 36S251 14 234 14s-17 36-33 36S168 14 151 14s-17 36-33 36S85 14 68 14 51 50 35 50 17 14 0 14z" fill="#FFD1DC"/></svg>
+</div>
+
+<!-- ============ SECCION 2 ============ -->
+<section class="story" id="recuerdos" aria-label="Recuerdos">
+  <div class="stage" id="stage">
+    <div class="glass rv" style="position:relative">
+      <span class="kicker">Resumen del mes</span>
+      <h2>Recapitulacion de nuestras aventuras</h2>
+    </div>
+
+    <div class="stack" aria-label="Dos fotos nuestras">
+      <figure class="polaroid"><img src="assets/churros.jpg" alt="Un churro dentro de una bolsa, comido de madrugada" loading="eager"><figcaption class="cap">creo q no hubo churros pero porsiacaso</figcaption></figure>
+      <figure class="polaroid"><img src="assets/postre.jpg" alt="Dos postres a medio comer sobre una mesa" loading="eager"><figcaption class="cap">postre de pobres xd</figcaption></figure>
+      <figure class="polaroid"><img src="assets/botella.jpg" alt="Una botella levantada frente a un atardecer" style="object-position:70% 50%" loading="eager"><figcaption class="cap">las llaveeees XD</figcaption></figure>
+      <figure class="polaroid"><img src="assets/bubbletea.jpg" alt="Dos bubble tea, uno morado y otro de oreo" loading="eager"><figcaption class="cap">bubbles teas :3</figcaption></figure>
+      <figure class="polaroid"><img src="assets/cheesecake.jpg" alt="Dos cafés y dos porciones de cheesecake" loading="eager"><figcaption class="cap">el par de tardones</figcaption></figure>
+      <figure class="polaroid"><img src="assets/boletos.jpg" alt="Dos entradas a un concierto y dos bebidas" loading="eager"><figcaption class="cap">somosss uwu </figcaption></figure>
+      <figure class="polaroid"><img src="assets/nosotros.jpg" alt="Selfie nuestra de noche, muy juntos" loading="eager"><figcaption class="cap">tú y yo, siempre</figcaption></figure>
+      <div class="st" style="width:64px;height:64px;right:-28px;top:-24px;color:var(--red);--r:10deg;z-index:6"><svg><use href="#heartSt"/></svg></div>
+      <div class="st" style="width:48px;height:48px;left:-24px;bottom:56px;color:var(--yellow);--r:-12deg;z-index:6"><svg><use href="#starSt"/></svg></div>
+      <div class="st" style="width:56px;height:56px;left:-16px;top:-20px;--r:-8deg;z-index:6"><svg><use href="#flowerSt"/></svg></div>
+      <span class="tag" style="right:-12px;bottom:28px;--r:7deg;z-index:6">te amo</span>
+      <span class="tag y" style="left:-18px;top:44%;--r:-9deg;z-index:6">Px2</span>
+      <span class="tag v" style="right:-14px;top:42%;--r:8deg;--dl:-2s;z-index:6">P<sup>2</sup></span>
+      <span class="tag b" style="left:8px;bottom:-14px;--r:-5deg;--dl:-1s;z-index:6">P&amp;P</span>
+    </div>
+
+    <p class="reveal" id="reveal">Cuatro meses perdido en esos ojitos. Contigo todo es mejor sisi.</p>
+  </div>
+</section>
+
+<!-- ============ SECCION 3 ============ -->
+<section class="final" id="cita" aria-label="Invitación">
+  <figure class="land rv">
+    <img src="assets/noche.jpg" alt="Selfie nuestra de noche frente a una casa amarilla" loading="lazy">
+    <figcaption class="cap">a ver nos comenzamos a tomar fotos pe jajaja</figcaption>
+    <div class="st" style="width:64px;height:64px;right:-24px;top:-28px;color:var(--red);--r:12deg"><svg><use href="#heartSt"/></svg></div>
+    <div class="st" style="width:56px;height:56px;left:-24px;bottom:24px;--r:-10deg"><svg><use href="#flowerSt"/></svg></div>
+    <span class="tag r" style="left:-10px;top:-18px;--r:-9deg">4 ever</span>
+    <span class="tag y" style="right:12px;bottom:-30px;--r:6deg;--dl:-2s;z-index:6">x siempre</span>
+    <div class="st" style="width:40px;height:40px;right:24px;bottom:-16px;color:var(--yellow);--r:8deg"><svg><use href="#starSt"/></svg></div>
+  </figure>
+
+  <h2 class="rv d1">Y esto recién empieza</h2>
+  <p class="sub rv d2">Quiero invitarte a una cita. Yo pongo las ganas, tú pones la sonrisa. Te espero aquí.</p>
+
+  <a class="meet rv d3" id="meet" href="https://www.google.com/maps/search/?api=1&query=-16.392768,-71.536131" target="_blank" rel="noopener">
+    <svg aria-hidden="true"><use href="#pin"/></svg>
+    <span>Punto de encuentro<br>(mi putiposte)</span>
+    <span class="tag y" style="right:-6px;top:-22px;--r:8deg">sisi</span>
+  </a>
+
+  <footer>P&amp;P · Hecho con mucho amor · cuatro meses y contando</footer>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var clamp=function(v,a,b){return Math.min(b,Math.max(a,v))};
+  var ease=function(t){return 1-Math.pow(1-t,5)};
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Video: intenta reproducir (iOS exige muted + playsinline) */
+  var vid=document.getElementById('vid');
+  function play(){var p=vid.play();if(p&&p.catch)p.catch(function(){})}
+  vid.muted=true;play();
+  vid.addEventListener('canplay',play);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)play()});
+  ['touchstart','click','scroll'].forEach(function(e){addEventListener(e,play,{once:true,passive:true})});
+
+  /* Mapa: Apple Maps en iPhone y Mac, Google Maps en el resto */
+  var isApple=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)||/Macintosh/.test(navigator.userAgent);
+  if(isApple){document.getElementById('meet').href='https://maps.apple.com/?ll=-16.392768,-71.536131&q=Punto%20de%20encuentro'}
+
+  /* Revelado con IntersectionObserver */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.2});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+
+  /* Palabras del texto (una por una) */
+  var rev=document.getElementById('reveal');
+  var words=rev.textContent.trim().split(/\s+/);
+  rev.innerHTML=words.map(function(w){return '<span class="w">'+w+'</span> '}).join('');
+  var spans=rev.querySelectorAll('.w');
+
+  /* Pila de fotos ligada al scroll (rAF) */
+  var story=document.getElementById('recuerdos'),ph=[].slice.call(document.querySelectorAll('.polaroid')),ticking=false;
+  var rot=[-5,4,-3,5,-4,3,-2],off=[0,8,-8,10,-6,6,0],N=ph.length,seg=.68/(N-1);
+  story.style.setProperty('--n',N);
+  function frame(){
+    ticking=false;
+    var r=story.getBoundingClientRect(),total=story.offsetHeight-innerHeight;
+    var p=clamp(-r.top/total,0,1);
+    ph.forEach(function(el,i){
+      if(i===0){el.style.transform='rotate('+rot[0]+'deg)';return}
+      var t=ease(clamp((p-.04-(i-1)*seg)/seg,0,1));
+      el.style.transform='translate('+(off[i]*t)+'px,'+((1-t)*120)+'svh) rotate('+(rot[i]+(i%2?14:-14)*(1-t))+'deg)';
+    });
+    var n=Math.round(clamp((p-.76)/.21,0,1)*spans.length);
+    spans.forEach(function(s,i){s.classList.toggle('on',i<n)});
+  }
+  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(frame)}}
+  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);frame();
+
+  /* Decoracion de la tarjeta: corazones y confeti */
+  var fx=document.getElementById('fx'),cols=['#FF3B6B','#FFD23F','#6EC8FF','#B794F6','#fff'];
+  if(!reduce){
+    for(var i=0;i<10;i++){
+      var h=document.createElement('div');h.className='heart-f';
+      h.style.cssText='left:'+(5+Math.random()*90)+'%;--t:'+(7+Math.random()*6)+'s;--dl:'+(-Math.random()*10)+'s;--dx:'+(Math.random()*60-30)+'px;color:'+cols[i%3];
+      h.innerHTML='<svg viewBox="0 0 32 32" width="24" height="24"><use href="#heart"/></svg>';fx.appendChild(h);
+    }
+    for(var j=0;j<14;j++){
+      var c=document.createElement('div');c.className='confetti';
+      c.style.cssText='left:'+Math.random()*100+'%;--t:'+(6+Math.random()*5)+'s;--dl:'+(-Math.random()*8)+'s;background:'+cols[j%cols.length]+';border-radius:'+(j%2?'50%':'2px');
+      fx.appendChild(c);
+    }
+  }
+
+  /* Toque en la pantalla: lluvia de corazones */
+  addEventListener('pointerdown',function(e){
+    if(reduce||e.target.closest('a'))return;
+    for(var k=0;k<6;k++){
+      var s=document.createElement('div');s.className='pop';
+      s.style.left=(e.clientX-16)+'px';s.style.top=(e.clientY-16)+'px';
+      s.style.setProperty('--x',(Math.random()*120-60)+'px');s.style.setProperty('--y',(-40-Math.random()*100)+'px');s.style.setProperty('--r',(Math.random()*60-30)+'deg');
+      s.style.color=cols[k%3];s.innerHTML='<svg viewBox="0 0 32 32" width="32" height="32"><use href="#heart"/></svg>';
+      document.body.appendChild(s);setTimeout(function(el){el.remove()},1000,s);
+    }
+  });
+})();
+</script>
+</body>
+</html>
