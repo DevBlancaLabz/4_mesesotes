@@ -58,7 +58,13 @@ a{color:inherit}
 
 .balloon{position:absolute;z-index:1;width:72px;height:128px;animation:rise var(--t,9s) ease-in-out infinite;animation-delay:var(--dl,0s);will-change:transform}
 .balloon svg{width:100%;height:100%;overflow:visible}
-@keyframes rise{0%,100%{transform:translateY(24px) rotate(-4deg)}50%{transform:translateY(-32px) rotate(5deg)}}
+@keyframes rise{0%,100%{transform:translateY(var(--a,24px)) rotate(-4deg)}50%{transform:translateY(calc(var(--a,24px) * -1.300)) rotate(5deg)}}
+.b1{left:4%;top:10%}.b2{right:5%;top:6%}.b3{left:8%;bottom:14%}.b4{right:6%;bottom:12%}
+@media (max-width:767px){
+  .hero{padding:140px 16px 172px}
+  .balloon{width:48px;height:86px;z-index:4;--a:8px}
+  .b1{left:24%;top:60px}.b2{right:24%;top:56px}.b3{left:40%;bottom:84px}.b4{right:16%;bottom:80px}
+}
 .heart-f{position:absolute;z-index:1;width:24px;height:24px;bottom:-32px;animation:up var(--t,10s) linear infinite;animation-delay:var(--dl,0s);opacity:0}
 @keyframes up{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:.9}100%{transform:translateY(-110svh) translateX(var(--dx,24px)) scale(1.2);opacity:0}}
 .confetti{position:absolute;z-index:1;width:12px;height:12px;border:2px solid var(--ink);animation:fall var(--t,7s) linear infinite;animation-delay:var(--dl,0s);top:-24px}
@@ -151,10 +157,10 @@ footer{font-size:.75rem;line-height:1rem;opacity:.7;margin-top:var(--s-200)}
 
 <!-- ============ SECCION 1 ============ -->
 <section class="hero" id="inicio" aria-label="Felicitación">
-  <div class="balloon" style="left:4%;top:10%;color:var(--red);--t:8s"><svg><use href="#balloon"/></svg></div>
-  <div class="balloon" style="right:5%;top:6%;color:var(--blue);--t:10s;--dl:-2s"><svg><use href="#balloon"/></svg></div>
-  <div class="balloon" style="left:8%;bottom:14%;color:var(--yellow);--t:9s;--dl:-4s"><svg><use href="#balloon"/></svg></div>
-  <div class="balloon" style="right:6%;bottom:12%;color:var(--purple);--t:11s;--dl:-1s"><svg><use href="#balloon"/></svg></div>
+  <div class="balloon b1" style="color:var(--red);--t:8s"><svg><use href="#balloon"/></svg></div>
+  <div class="balloon b2" style="color:var(--blue);--t:10s;--dl:-2s"><svg><use href="#balloon"/></svg></div>
+  <div class="balloon b3" style="color:var(--yellow);--t:9s;--dl:-4s"><svg><use href="#balloon"/></svg></div>
+  <div class="balloon b4" style="color:var(--purple);--t:11s;--dl:-1s"><svg><use href="#balloon"/></svg></div>
   <div id="fx"></div>
   <span class="tag lg r h1t" style="--r:-8deg">4 ever</span>
   <span class="tag lg y h2t" style="--r:7deg;--dl:-1s">P<sup>2</sup></span>
